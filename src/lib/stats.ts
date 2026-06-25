@@ -3,6 +3,8 @@ import type { Attempt } from "../types"
 export function computeStats(attempts: Attempt[]) {
   const total = attempts.length
   const solved = attempts.filter((a) => a.status === "solved").length
+  const partial = attempts.filter((a) => a.status === "partial").length
+  const unsolved = attempts.filter((a) => a.status === "unsolved").length
   const solvedInTime = attempts.filter((a) => a.solvedInTime).length
   const totalSeconds = attempts.reduce((s, a) => s + a.durationSec, 0)
   const avgMinutes = total ? totalSeconds / total / 60 : 0
@@ -25,6 +27,10 @@ export function computeStats(attempts: Attempt[]) {
     if (a.status === "solved") byChapter[k].solved++
   }
 
+  return { total, solved, partial, unsolved, solvedInTime, successRate, inTimeRate, avgMinutes, streak, byChapter }
+}
+
+export function byDay(attempts: Attempt[]) {
   const series: { day: string; count: number; solved: number }[] = []
   for (let i = 13; i >= 0; i--) {
     const dd = new Date()
@@ -41,6 +47,21 @@ export function computeStats(attempts: Attempt[]) {
       solved: dayAttempts.filter((a) => a.status === "solved").length,
     })
   }
+  return series
+}
 
-  return { total, solved, solvedInTime, successRate, inTimeRate, avgMinutes, streak, byChapter, series }
+export function byDifficulty(attempts: Attempt[]) {
+  const groups: { key: Attempt["difficulty"]; label: string }[] = [
+    { key: "سهل", label: "سهل" },
+    { key: "متوسط", label: "متوسط" },
+    { key: "صعب", label: "صعب" },
+    { key: "", label: "غير محدد" },
+  ]
+  return groups
+    .map(({ key, label }) => ({
+      label,
+      count: attempts.filter((a) => a.difficulty === key).length,
+      solved: attempts.filter((a) => a.difficulty === key && a.status === "solved").length,
+    }))
+    .filter((g) => g.count > 0)
 }
