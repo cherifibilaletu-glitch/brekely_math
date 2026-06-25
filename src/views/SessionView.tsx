@@ -11,6 +11,9 @@ import { ArrowLeft, Check, Coffee, Pause, Play, RotateCcw } from "lucide-react"
 
 type Phase = "setup" | "focus" | "result" | "writeup" | "break" | "done"
 
+const popInit = { scale: 0 }
+const popAnim = { scale: 1 }
+
 export default function SessionView({ settings, setSettings, addAttempt, goStats }: {
   settings: Settings
   setSettings: (s: Settings) => void
@@ -230,6 +233,13 @@ export default function SessionView({ settings, setSettings, addAttempt, goStats
 
   return (
     <div className="max-w-xl mx-auto glass rounded-3xl p-10 text-center space-y-6">
-      <motion.div initial= scale: 0  animate= scale: 1  className="text-6xl">🎉</motion.div>
+      <motion.div initial={popInit} animate={popAnim} className="text-6xl">🎉</motion.div>
       <h2 className="text-2xl font-extrabold">أحسنت! تم حفظ المحاولة.</h2>
-      <p className="text-white/60
+      <p className="text-white/60">كل مسألة تقرّبك من إتمام كتاب بِركلي. واصل الزخم!</p>
+      <div className="flex gap-3 justify-center">
+        <button onClick={resetAll} className="px-6 py-3 rounded-2xl bg-indigo-500 hover:bg-indigo-400 font-bold">مسألة جديدة</button>
+        <button onClick={goStats} className="px-6 py-3 rounded-2xl bg-white/10 hover:bg-white/20">شاهد الإحصائيات</button>
+      </div>
+    </div>
+  )
+}
