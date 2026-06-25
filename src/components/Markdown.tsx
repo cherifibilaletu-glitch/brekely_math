@@ -27,5 +27,6 @@ export default function Markdown({ source }: { source: string }) {
     return marked.parse(renderMath(source), { breaks: true, gfm: true }) as string
   }, [source])
   if (!html) return <p className="text-white/40">لا يوجد محتوى بعد…</p>
-  return <div className="prose-math max-w-none" dangerouslySetInnerHTML= __html: html  />
+  const inner = { __html: html }
+  return <div className="prose-math max-w-none" dangerouslySetInnerHTML={inner} />
 }
