@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: dark; }
+html, body, #root { height: 100%; }
+body {
+  margin: 0;
+  font-family: "Cairo", "Inter", system-ui, sans-serif;
+  background: #06070d;
+  color: #e8ecf6;
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,.12); border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,.2); }
+
+.glass {
+  background: rgba(20, 24, 38, 0.55);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.text-gradient {
+  background: linear-gradient(120deg, #c4b5fd, #818cf8 40%, #22d3ee);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.prose-math { line-height: 1.9; }
+.prose-math h1, .prose-math h2, .prose-math h3 { font-weight: 800; margin: 1.1em 0 .5em; }
+.prose-math p { margin: .7em 0; }
+.prose-math ul, .prose-math ol { padding-inline-start: 1.4em; }
+.prose-math pre { background: #0b0e18; padding: 1rem; border-radius: 12px; overflow: auto; direction: ltr; text-align: left; }
+.prose-math code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .9em; }
+.prose-math blockquote { border-inline-start: 3px solid #6366f1; padding-inline-start: 1rem; color: #aab2c8; margin: .8em 0; }
+.prose-math a { color: #7dd3fc; }
+.prose-math table { border-collapse: collapse; margin: .8em 0; }
+.prose-math th, .prose-math td { border: 1px solid rgba(255,255,255,.12); padding: .4rem .7rem; }
+.prose-math .katex-display { overflow-x: auto; overflow-y: hidden; padding: .3em 0; }
+
+@keyframes float { 0%, 100% { transform: translateY(0) } 50% { transform: translateY(-16px) } }
+.animate-float { animation: float 8s ease-in-out infinite; }
