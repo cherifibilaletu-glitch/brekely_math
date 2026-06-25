@@ -21,6 +21,7 @@ export default function MarkdownEditor({ value, onChange, placeholder, minHeight
   minHeight?: number
 }) {
   const [mode, setMode] = useState<Mode>("split")
+  const boxStyle = { minHeight }
   return (
     <div className="glass rounded-2xl overflow-hidden">
       <div className="flex items-center gap-1 px-3 py-2 border-b border-white/10 flex-wrap">
@@ -35,10 +36,10 @@ export default function MarkdownEditor({ value, onChange, placeholder, minHeight
       </div>
       <div className={`grid ${mode === "split" ? "md:grid-cols-2" : "grid-cols-1"}`}>
         {mode !== "preview" && (
-          <textarea dir="auto" value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} style= minHeight  className="w-full bg-transparent p-4 outline-none resize-y font-mono text-sm leading-7 border-b border-white/10 md:border-b-0 md:border-e" />
+          <textarea dir="auto" value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} style={boxStyle} className="w-full bg-transparent p-4 outline-none resize-y font-mono text-sm leading-7 border-b border-white/10 md:border-b-0 md:border-e" />
         )}
         {mode !== "write" && (
-          <div className="p-4 overflow-auto" style= minHeight  dir="auto"><Markdown source={value} /></div>
+          <div className="p-4 overflow-auto" style={boxStyle} dir="auto"><Markdown source={value} /></div>
         )}
       </div>
     </div>
